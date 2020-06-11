@@ -193,6 +193,24 @@ def user_stats(df):
     print('-'*40)
 
 
+def display_data(df):
+    """Displays bikesshare data 5 rows by 5 rows upon user request."""
+    
+    choice = input("[+] do you want to see raw data? (yes or no): ")
+    start_idx = 0
+    
+    while choice != "no":
+        if choice == "yes":
+            end_idx = start_idx + 5
+            print(df[start_idx:end_idx])
+            start_idx = end_idx
+            choice = input("[+] do you want to see more 5 lines of raw data? (yes or no): ")
+        else:
+            print("[-] Invalid Input")
+            choice = input("[+] do you want to see raw data? (yes or no): ")
+            
+
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -202,6 +220,8 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        
+        display_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
